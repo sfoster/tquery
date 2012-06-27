@@ -1,0 +1,26 @@
+<!doctype html><title>Minimal tQuery Page</title>
+<script src="../../../build/tquery-bundle.js"></script>
+<script src="../../requirejs/tquery.norequirejs.js"></script>
+
+<script src="../../../vendor/threex/THREEx.DeviceOrientationState.js"></script>
+<script src="../tquery.deviceorientation.js"></script>
+
+<body><script>
+	var world	= tQuery.createWorld().boilerplate().start();
+	var object	= tQuery.createTorus().addTo(world);
+	tQuery.createAxis().addTo(object);
+	
+	world.removeCameraControls();
+	
+	world.loop().hook(function(){
+		var orientation	= tQuery.deviceOrientation();
+		// for macbook
+		//object.rotation( -orientation.angleY(), orientation.angleX(), orientation.angleZ() );
+		//object.rotation( -orientation.angleY(), 0, orientation.angleZ() );
+
+		// for ipad
+		object.rotation( -orientation.angleZ(), orientation.angleY(), -orientation.angleX() );
+		
+		// no idea why it is different, nor what is the theorical value
+	})
+</script></body>

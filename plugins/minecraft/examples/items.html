@@ -1,0 +1,40 @@
+<!doctype html><title>Minimal tQuery Page</title>
+<script src="../../../build/tquery-bundle.js"></script>
+<script src="../tquery.spritesheet.js"></script>
+<script src="../../materials/tquery.meshbasicmaterial.js"></script>
+<body><script>
+	var world	= tQuery.createWorld().boilerplate().start();
+	tQuery.createCube().addTo(world)
+		.setBasicMaterial().color(0x000000).wireframe(true).back();
+
+	var spritesheet	= new tQuery.Spritesheet({
+		url	: 'images/items/items.png',
+		imgW	: 256,
+		imgH	: 256,
+		spriteW	: 16,
+		spriteH	: 16
+	});
+	spritesheet.bind('load', function(){
+		console.log("image loaded");
+		spritesheet.createMesh(10+2*16).addTo(world);
+
+		if( true ){
+			var nItems	= (256/16)*(256/16);
+			for(var i=0; i < nItems; i++){
+				for(var j=0; j < 1; j++) {
+					var item	= spritesheet.createMesh(i)
+					// if this spot is empty, do nothing
+					if( item === null )	continue;
+					// set a random position
+					item.position((Math.random()*2-1)*15, (Math.random()*2-1)*15, (Math.random()*2-1)*15)
+					// add it to the worldPP
+					item.addTo(world);
+				}
+			}			
+			
+		}
+	})
+	
+
+
+</script></body>
