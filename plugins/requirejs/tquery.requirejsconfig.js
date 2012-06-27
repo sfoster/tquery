@@ -1,4 +1,7 @@
-(function(requirejs){
+(function(undef){
+	var global = this, 
+			requirejs = global.requirejs;
+
 	var config = {
 		baseUrl: "../../..",
 		enforceDefine: true,
@@ -15,11 +18,13 @@
 			}
 		} 
 	};
-	if(!requirejs) {
+	if(!global.requirejs) {
+  	console.log("assigning global require as config: ", config);
 		// if this is loaded before require.js we just leave our config there where it can find it
-		 requirejs = config;
+		 require = config;
 	} else {
 		// if requirejs is already defined, pass it our config
+		console.log("Calling requirejs.config with: ", config);
 		requirejs.config(config);
 	}
-})(requirejs);
+})();
